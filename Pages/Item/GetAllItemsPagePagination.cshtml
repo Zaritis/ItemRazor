@@ -1,0 +1,150 @@
+﻿@page "{handler?}"
+@model ItemRazor.Pages.Item.GetAllItemsPagePaginationModel
+@{
+}
+<br />
+<h1>Computer Items</h1>
+<br />
+<div class="row">
+    <div class="col-4"><h5>Search Name</h5></div>
+    <div class="col-4"><h5>Filter Price</h5></div>
+    <div class="col-4"></div>
+</div>
+<div class="row">
+    <div class="col-4">
+        <form method="post" class="form-inline">
+            <input asp-for="@Model.SearchString" class="form-control mr-1" placeholder="Enter search term" />
+            <input type="submit" asp-page-handler="NameSearch" value="Search" class="btn btn-primary" />
+        </form>
+    </div>
+
+    <div class="col-5">
+        <form method="post" class="form-inline">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Min</span>
+                </div>
+                <input asp-for="@Model.MinPrice" class="form-control mr-1" />
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Max</span>
+                </div>
+                <input asp-for="@Model.MaxPrice" class="form-control mr-1" />
+                <input type="submit" asp-page-handler="PriceFilter" value="Filter" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+
+    <div class="col-2"></div>
+</div>
+<br />
+<div class="test">
+    <table class="table table-bordered table-hover table-striped" width="60%">
+        <col style="width: 7%">
+        <col style="width: 74%">
+        <col style="width: 10%">
+        <col style="width: 9%">
+        <thead>
+            <tr class="btn-secondary active">
+                <th>
+                    <div class="d-flex justify-content-between p-0">
+                        <div><h5>Id </h5></div>
+                        <div>
+                            <a data-toggle="tooltip" title="Sort By Id" asp-page-handler="SortById"><i class="fa fa-angle-up"></i></a>
+                            <a data-toggle="tooltip" title="Sort By Id Descending" asp-page-handler="SortByIdDescending"><i class="fa fa-angle-down"></i></a>
+                        </div>
+                    </div>
+                </th>
+                <th>
+                    <div class="d-flex justify-content-between p-0">
+                        <div>
+                            <h5>Name </h5>
+                        </div>
+                        <div>
+                            <a data-toggle="tooltip" title="Sort By Name" asp-page-handler="SortByName"><i class="fa fa-angle-up"></i></a>
+                            <a data-toggle="tooltip" title="Sort By Name Descending" asp-page-handler="SortByNameDescending"><i class="fa fa-angle-down"></i></a>
+                        </div>
+                    </div>
+                   
+                </th>
+                <th>
+                    <div class="d-flex justify-content-between p-0">
+                        <div>
+                            <h5>Price </h5>
+                        </div>
+                        <div>
+                            <a data-toggle="tooltip" title="Sort By Price" asp-page-handler="SortByPrice"><i class="fa fa-angle-up"></i></a>
+                            <a data-toggle="tooltip" title="Sort By Price Descending" asp-page-handler="SortByPriceDescending"><i class="fa fa-angle-down"></i></a>
+                        </div>
+                    </div>
+                </th>
+                <th>
+                    <h5>Action</h5>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (@Model.Items != null)
+            {
+                foreach (var item in Model.Items)
+                {
+                    <tr class="btn-secondary">
+                        <td>
+                            @item.ItemId
+                        </td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            <!-- Call to action buttons -->
+                            <ul class="list-inline m-0">
+                                <li class="list-inline-item">
+                                    <a class="btn btn-primary btn-sm" type="button" data-toggle="tooltip" title="Edit" asp-page="EditItem" asp-route-id="@item.ItemId"><i class="fa fa-edit"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="btn btn-danger btn-sm " type="button" data-toggle="tooltip" data-placement="top" title="Delete" asp-page="DeleteItem" asp-route-id="@item.ItemId"><i class="fa fa-trash"></i></a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <ul class="pagination">
+        <li class="page-item @(!Model.ShowFirst? "disabled":"")">
+            <a asp-page="GetAllItemsPagePagination" asp-route-CurrentPage="1" class="page-link"> <i class="fa fa-fast-backward"></i></a>
+        </li>
+
+        <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
+            <a asp-page="GetAllItemsPagePagination" asp-route-CurrentPage="@(Model.CurrentPage -1)" class="page-link"><i class="fa fa-angle-left"></i></a>
+        </li>
+        <li class="page-item  @(!Model.ShowNext? "disabled":"")">
+            <a asp-page="GetAllItemsPagePagination" asp-route-CurrentPage="@(Model.CurrentPage + 1)" class="page-link"><i class="fa fa-angle-right"></i></a>
+        </li>
+
+        <li class="page-item  @(!Model.ShowLast? "disabled":"")">
+            <a asp-page="GetAllItemsPagePagination" asp-route-CurrentPage="@Model.TotalPages" class="page-link"><i class="fa fa-fast-forward"></i></a>
+        </li>
+        <li class="page-item ml-2">
+            <a class="page-link">@Model.CurrentPage</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link">of</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link">@Model.TotalPages pages</a>
+        </li>
+    </ul>
+</div>
+
+<br />
+<p>
+    <a class="btn btn-primary" data-toggle="tooltip" title="Add Item" asp-page="CreateItem"><i class="fa fa-plus-square mr-1"></i> Create a new Item </a>
+</p>
+<br />

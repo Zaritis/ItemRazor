@@ -1,0 +1,42 @@
+[
+  {
+    "Id": 3,
+    "Name": "LG 24\u0022 24MD4KL Ultrafine 4K Monitor 24\u0022 3840 x 2160 16:9",
+    "Price": 4499
+  },
+  {
+    "Id": 6,
+    "Name": "Logitech M705 Mus Tr\u00E5dl\u00F8s S\u00F8lv",
+    "Price": 269
+  },
+  {
+    "Id": 4,
+    "Name": "Terminal bord, h\u00E6ve s\u00E6nke",
+    "Price": 14000
+  },
+  {
+    "Id": 7,
+    "Name": "Terminal bord, Delux, h\u00E6ve s\u00E6nke",
+    "Price": 16000
+  },
+  {
+    "Id": 9,
+    "Name": "Voxicon Ergomouse M910 2,400dpi Mus Tr\u00E5dl\u00F8s Sort; S\u00F8lv",
+    "Price": 319
+  },
+  {
+    "Id": 10,
+    "Name": "Logitech HD Pro Webcam C920 Sort",
+    "Price": 719
+  },
+  {
+    "Id": 1,
+    "Name": "Microsoft Surface Pro 7\u002B Core i7 512GB 12.3",
+    "Price": 13495
+  },
+  {
+    "Id": 2,
+    "Name": "Surface Pro Type Cover Black",
+    "Price": 999
+  }
+]
