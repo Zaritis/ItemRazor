@@ -36,7 +36,7 @@ namespace ItemRazor.Pages
 
         public IActionResult OnGetSortByIdDescending()
         {
-            Items = itemService.SortById().ToList(); // Fix with SortByIdDesc()
+            Items = itemService.SortByIdDescending().ToList();
             return Page();
         }
 
